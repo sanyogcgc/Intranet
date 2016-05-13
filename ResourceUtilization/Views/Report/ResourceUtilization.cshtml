@@ -1,0 +1,87 @@
+﻿@model ViewModel.ResourceViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="jumbotron">
+    <div class="col-md-12"> <h3> Resource Utilization Report</h3></div>
+    <div class="col-md-12"><hr /></div>
+
+    <div class="outer-form">
+        <div class="form_layout ">
+            <div class="row col-md-12">
+                <div class="col-md-2 ">Projects :</div>
+                <div class="col-md-4 ">
+                    @Html.DropDownListFor(m => m.SelectedProject, new SelectList(Model.ProjectList, "ID", "ClientProject"), "--Select Project--", new { id = "ddlProject", @class = "form-control", onchange = "ResetData();" })
+                </div>
+                <div class="col-md-2 ">Year List :</div>
+                <div class="col-md-4 ">
+                    @Html.DropDownListFor(m => m.SelectedYear, new SelectList(Model.YearList, "Value", "Text"), "--Select Year--", new { id = "ddlYear", onchange = "fillWeek();", @class = "form-control" })
+                </div>
+
+
+            </div>
+            <div class="row col-md-12" style="margin-bottom:15px;"></div>
+            <div class="row col-md-12">
+
+                <div class="col-md-2 ">Week List :</div>
+                <div class="col-md-4 ">
+                    @Html.DropDownListFor(m => m.SelectedWeek, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"), "--Select Week--", new { id = "ddlWeek", @class = "form-control" })
+                </div>
+                <div class="row"><p></p></div>
+                <div class="col-md-12" style="margin-top:15px;"><center><input type="button" class="btn" name="Generate" value="Generate" id="btnGenerate" onclick="getData()" /> </center></div>
+
+            </div>
+
+        </div>
+
+        <div class="row col-md-12 " style="align-items:center"><hr /></div>
+        <div class="row clearfix">
+
+            <div class="col-md-12 ">
+                <fieldset>
+                    <div id="jqGrid" class="table2excel">
+                        @Html.Partial("_List")
+                    </div>
+                </fieldset>
+            </div>
+
+        </div>
+        <div class="row clearfix">
+            <hr />
+            <div class="col-md-12">
+                @*<center><input type="button" name="Export" value="Export" id="btnExport" onclick="exportGrid()" /> </center>*@
+                <div id="exprt">
+                    <center><button name="btnExportReport" id="btnExportReport" type="submit" class="btn">Export report</button></center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@*</div>*@
+
+<script type="text/javascript">
+    var paramFromView = {
+        Url: '@Url.Content("~/Report/GetUtilizationReport")',
+        UrlSave: '@Url.Content("~/Home/Update")',
+        Width: '',
+        Height: '',
+        FormId: '#ResourceForm',
+        GridId: '#_ResourcePlanningGrid',
+        DataNotAvaliable: 'No Records Found',
+        Message: '#lblMessage',
+        btnSubmit: '#btnSubmit',
+        urlRelative: '@Url.Content("~/")',
+    };
+</script>
+<link href="~/Css/jquery-ui.css" rel="stylesheet" />
+<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Css/ui.jqgrid.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/jquery.table2excel.js"></script>
+<script src="~/Scripts/grid.locale-en.js"></script>
+<script src="~/Scripts/ReportResourcesUtilization.js"></script>

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-2.1.3.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/jquery.jqGrid.min.js"></script>
+    <script src="Scripts/grid.locale-en.js"></script>
+    <link href="Css/jquery-ui.css" rel="stylesheet" />
+    <link href="Css/ui.jqgrid.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var mydata = [{ Id: 1, Name: "Shashikant", Designation: "Software Developer" },
+                              { Id: 2, Name: "Murli", Designation: "Sr. Software Developer" },
+                              { Id: 3, Name: "Munendra", Designation: "Software Developer" },
+                              { Id: 4, Name: "Gaurav", Designation: "Software Developer" },
+                              { Id: 5, Name: "Achint", Designation: "Software Developer" }];
+
+            var grid = $("#grid");
+
+            grid.jqGrid({
+                data: mydata,
+                datatype: "local",
+                colNames: ['Id', 'Name', 'Designation', 'Actions'],
+                colModel: [
+               { name: 'Id', index: 'Id', width: 60, sorttype: "int", editable: true },
+               { name: 'Name', index: 'Name', width: 180, sorttype: "string", editable: true },
+               { name: 'Designation', index: 'Designation', width: 120, sorttype: "string", editable: true },
+               {
+                   name: 'Actions', index: 'Actions', width: 100, height: 120, editable: true, formater: 'actions',
+                   formatoptions: {
+                       keys: true,
+                       editformbutton: true
+                   }
+               }
+                ],
+
+                gridview: true,
+                sortname: 'Id',
+                treeGrid: true,
+                loadonce: true,
+                treeGridModel: 'adjacency',
+                treedatatype: 'local',
+                ExpandColumn: 'label',
+                height: 'auto',
+                pager: "#gridPager",
+                caption: "Resources Allocation",
+                jsonReader: { repeatitems: false }
+            });
+            grid[0].addJSONData({
+                total: 1,
+                page: 1,
+                records: mydata.length,
+                rows: mydata
+            });
+        });
+    </script>
+</head>
+<body>
+    <table id="grid"></table>
+    <div id="gridPager"></div>
+</body>
+</html>

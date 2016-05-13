@@ -1,0 +1,12 @@
+D:\Ishir Projects\ResourceUtilization\DataAccess\bin\Debug\DataAccess.dll.config
+D:\Ishir Projects\ResourceUtilization\DataAccess\bin\Debug\DataAccess.dll
+D:\Ishir Projects\ResourceUtilization\DataAccess\bin\Debug\DataAccess.pdb
+D:\Ishir Projects\ResourceUtilization\DataAccess\bin\Debug\EntityFramework.dll
+D:\Ishir Projects\ResourceUtilization\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+D:\Ishir Projects\ResourceUtilization\DataAccess\bin\Debug\ViewModel.dll
+D:\Ishir Projects\ResourceUtilization\DataAccess\bin\Debug\ViewModel.pdb
+D:\Ishir Projects\ResourceUtilization\DataAccess\bin\Debug\EntityFramework.xml
+D:\Ishir Projects\ResourceUtilization\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+D:\Ishir Projects\ResourceUtilization\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+D:\Ishir Projects\ResourceUtilization\DataAccess\obj\Debug\DataAccess.dll
+D:\Ishir Projects\ResourceUtilization\DataAccess\obj\Debug\DataAccess.pdb

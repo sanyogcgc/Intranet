@@ -1,0 +1,127 @@
+﻿@model ResourceUtilization.Models.ResourceModels
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/Scripts/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jquery.jqGrid.min.js"></script>
+    <script src="~/Scripts/TodoList.js"></script>
+   
+    
+    
+</head>
+<body>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+            jQuery("#btnCopy").click(function () {
+           
+                    
+              
+               
+            });
+
+            jQuery("#GrdResource").jqGrid({
+                url: '/Resources/GridData/',
+                loadError: function (xhr, status, error) {
+                    alert('load error: ' + error);
+                },
+                datatype: 'json',
+                colNames: ['Name', 'Designation', 'Billable', 'Non Billable', 'Billable', 'Non Billable', 'Invoice Hours'],
+                colModel: [
+                  { name: 'Name', index: 'Name', width: 200, align: 'left' },
+                  { name: 'Designation', index: 'Designation', width: 200, align: 'left' },
+                  { name: 'CurrentBillable', index: 'CurrentBillable', width: 100, align: 'left' },
+                  { name: 'CurrentNonBillable', index: 'CurrentNonBillable', width: 100, align: 'left' },
+                  { name: 'NextBillable', index: 'NextBillable', width: 100, align: 'left' },
+                  { name: 'NextNonBillable', index: 'NextNonBillable', width: 100, align: 'left' },
+                  { name: 'InvoiceHours', index: 'InvoiceHours', width: 100, align: 'left' }
+
+                ],
+
+                mtype: 'GET',
+                gridview: true,
+                jsonReader: {
+                    repeatitems: false,
+                    id: "Id",
+                    root: function (obj) { return obj; },
+                    page: function (obj) { return 1; },
+                    total: function (obj) { return 1; },
+                    records: function (obj) { return obj.length; }
+                },
+               
+                multiselect: false,
+                rowNum: 10,
+                emptyrecords: 'No Records To Display',
+                pager: jQuery('#pager'),
+                rowList: [5, 10, 20, 50],
+                sortname: 'Name',
+                sortorder: "desc",
+                viewrecords: true,
+                imgpath: '/scripts/themes/coffee/images',
+                caption: 'Resource Allocation'
+               
+            });
+            jQuery("#GrdResource").jqGrid('setGroupHeaders', {
+                useColSpanStyle: true,
+                groupHeaders: [
+                  { startColumnName: 'CurrentBillable', numberOfColumns: 2, titleText: '<em>Current Week</em>' },
+                   { startColumnName: 'NextBillable', numberOfColumns: 2, titleText: '<em>Next Week</em>' }
+
+                ]
+            });
+        });
+       
+    </script>
+    <table align="center">
+        <tr> <td colspan="2" align="center"><h1>Resource Allocation</h1></td></tr>
+        <tr> <td colspan="2" style="height:100px;"></td></tr>
+        <tr>
+            <td align="right">Projects</td>
+            <td align="left">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true)
+
+
+                        @Html.DropDownListFor(m => m.SelectedProject, new SelectList(Model.ProjectList, "Id", "ProjectName", "--Select Project--"), new { onchange = "document.location.href = '/Resources/SelectedProjectId?ProjectId=' + this.options[this.selectedIndex].value;" })
+
+
+                    </div>
+
+
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table id="GrdResource" ></table>
+                <div id="pager"></div>
+            </td>
+        </tr>
+        <tr><td colspan="2" align="right"><input type="button" id="btnCopy" value="Copy" /> &nbsp; <input type="button" value="Save" /> &nbsp; <input type="button" value="Submit" /> </td></tr>
+    </table>
+
+
+
+
+
+</body>
+</html>

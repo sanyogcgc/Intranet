@@ -1,0 +1,5 @@
+D:\Ishir Projects\ResourceUtilization\ViewModel\bin\Debug\ViewModel.dll
+D:\Ishir Projects\ResourceUtilization\ViewModel\bin\Debug\ViewModel.pdb
+D:\Ishir Projects\ResourceUtilization\ViewModel\obj\Debug\ViewModel.csprojResolveAssemblyReference.cache
+D:\Ishir Projects\ResourceUtilization\ViewModel\obj\Debug\ViewModel.dll
+D:\Ishir Projects\ResourceUtilization\ViewModel\obj\Debug\ViewModel.pdb

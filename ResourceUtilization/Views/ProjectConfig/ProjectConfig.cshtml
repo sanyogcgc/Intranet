@@ -1,0 +1,467 @@
+﻿@model ViewModel.ProjectConfigViewModel
+
+@{
+    ViewBag.Title = "ProjectConfig";
+}
+
+<h2>ProjectConfig</h2>
+@*<form id="Form1" method="post" runat="server" align="center">*@
+<div>
+    @*@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "ResourceForm" }))
+        {*@
+    <center>
+        <table id="Table1" style="HEIGHT: 1082px" bordercolor="#4f77ab" cellpadding="0" width="90%"
+               align="center" border="1" centercellspacing="0">
+            <tbody>
+                <tr>
+                    <td valign="middle" width="100%" bgcolor="#4f77ab">
+                        <table id="Table3" cellspacing="0" cellpadding="0" width="100%" align="center" border="0">
+                            <tr>
+                                <td width="60%">
+                                    <img height="20" src="../property.gif" border="0">&nbsp;&nbsp;&nbsp;<font face="Verdana" color="#ffffff" size="2">
+                                        <strong>
+                                            Project&nbsp;Configuration
+                                        </strong>
+                                    </font>
+                                </td>
+                                <td valign="baseline" align="right">
+                                    <font size="1">
+                                        <font color="#9999ff">
+                                        </font>&nbsp;
+                                    </font>&nbsp;
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100%">
+                        <table id="Table2" style="WIDTH: 715px; HEIGHT: 1008px" cellspacing="0" cellpadding="2"
+                               align="center" border="0">
+                            <tbody>
+                                <tr>
+                                    <td class="format" style="WIDTH: 555px" align="center">
+                                        <table id="TableTeam" style="WIDTH: 706px; HEIGHT: 985px" bordercolor="#4f77ab" cellspacing="0"
+                                               cellpadding="2" width="706" border="1">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="format" style="HEIGHT: 53px" align="center" colspan="2">
+                                                        <table id="Table5" cellspacing="0" cellpadding="2" width="100%" border="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="format" align="center" colspan="4"><asp:label id="lblMessage" runat="server" ForeColor="Red" Visible="False" Font-Bold="True"></asp:label></td>
+                                                                </tr>
+                                                                <tr height="25">
+                                                                    <td class="format" valign="baseline" align="right" width="40%" colspan="2">
+                                                                        <font face="Verdana" size="1">
+                                                                            <font size="2">
+                                                                                Select
+                                                                                Project<strong> <font color="red">*</font>:</strong>
+                                                                            </font>
+                                                                        </font>
+                                                                    </td>
+                                                                    <td valign="middle" align="left" width="60%" colspan="2">
+                                                                        <font face="Verdana">
+                                                                            @*<asp:dropdownlist id="ddlProject" runat="server" AutoPostBack="True" Font-Names="Verdana" Width="250pt"></asp:dropdownlist><asp:requiredfieldvalidator id="rfvProject" runat="server" Font-Names="Verdana" Font-Size="X-Small" ErrorMessage="Please select project!"
+                                                                                InitialValue="0" ControlToValidate="ddlProject"></asp:requiredfieldvalidator>*@
+                                                                            @Html.DropDownListFor(m => m.SelectedProject, new SelectList(Model.ProjectList, "ID", "ClientProject"), "--Select Project--", new { id = "ddlProject",  onchange = "loaddata();" })
+                                                                        </font>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr height="25">
+                                                                    <td class="format" valign="baseline" align="right" width="50%" colspan="2"><font face="Verdana" size="2">Estimated&nbsp;Efforts<strong>:</strong></font></td>
+                                                                    <td valign="middle" align="left" width="50%" colspan="2">
+                                                                        @*<asp:label id="lblEstEffort" runat="server" Font-Names="Verdana" Font-Size="Smaller"></asp:label>*@
+                                                                        <span id="spnEstEffrt" style="font-family:Verdana;font-size:smaller;"></span>&nbsp;<font face="Verdana" size="2">
+                                                                            Man
+                                                                            Days (as per Proposal)
+                                                                        </font>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr height="25">
+                                                                    <td class="format" valign="baseline" align="right" width="50%" colspan="2">
+                                                                        <font face="Verdana" size="1">
+                                                                            <font size="2">
+                                                                                Planned
+                                                                                Efforts<strong><font color="#000000">:</font></strong>
+                                                                            </font>
+                                                                        </font>
+                                                                    </td>
+                                                                    <td valign="baseline" align="left" width="28%">
+                                                                        <font face="Verdana" size="2">
+                                                                            @*<asp:textbox id="txtPlannedEfforts" tabIndex="1" runat="server" Font-Names="Verdana" Width="60px"></asp:textbox>*@
+                                                                            <input id="txtPlnnedEffrt" name="PlannedEfforts" type="text" value="" style="font-family:Verdana;width:60px;" disabled />
+                                                                            Man Days as per
+                                                                        </font>
+                                                                    </td>
+                                                                    <td valign="baseline" align="left">
+                                                                        @*<asp:radiobuttonlist id="rdlPhaseModule" tabIndex="22" runat="server" AutoPostBack="True" Font-Names="Verdana"
+                                                                            Width="70%" Font-Size="X-Small" RepeatDirection="Horizontal">*@
+                                                                        @Html.RadioButton("rdlPhaseModule", "Phases", isChecked: true)
+                                                                        <asp:listitem value="Phases" selected="True">Phases</asp:listitem>
+                                                                        @Html.RadioButton("rdlPhaseModule", "Modules")
+                                                                        <asp:listitem value="Modules">Modules</asp:listitem>
+                                                                        @*</asp:radiobuttonlist>*@
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        &nbsp;
+                                                        <asp:literal id="litBusinessUnit" runat="server" Visible="False"></asp:literal>
+                                                    </td>
+                                                </tr>
+                                                <tr bgcolor="#e6f2ff">
+                                                    <td class="format" valign="bottom" align="center" colspan="2">
+                                                        <strong>
+                                                            <font face="Verdana" size="2">
+                                                                Select
+                                                                applicable Phases/Sprint for Project
+                                                            </font>
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="format" valign="bottom" align="center" colspan="2">
+                                                        <table id="TablePhases" cellspacing="0" cellpadding="0" width="100%" border="1">
+                                                            <tr>
+                                                                <td width="35%"><font face="Verdana" size="2">Select Phase</font></td>
+                                                                <td width="30%"><font face="Verdana" size="2">Allocate Phase Time</font></td>
+                                                                <td width="35%">
+                                                                    <font face="Verdana" size="2">
+                                                                        Selected <strong>Phase/Sprint</strong>(s) : <strong>Time</strong>
+                                                                        (Man Days)
+                                                                    </font>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="35%">
+                                                                    @*<asp:listbox id="lstBUPhases" tabIndex="2" runat="server" AutoPostBack="True" Font-Names="Verdana"
+                                                                        Width="99%" Rows="7"></asp:listbox>*@
+                                                                    @*@Html.ListBoxFor(s => s.SelectedPhases, new SelectList(Model.phaseList, "Phaseid", "PhaseName"))*@
+                                                                    @Html.DropDownListFor(s => s.SelectedPhases, new SelectList(Model.phaseList, "Phaseid", "PhaseName"), "", new { id = "ddlPhaseAll", size = 6, onclick = "fillPhases();" })
+                                                                    @*@Html.DropDownList(s => s.SelectedPhases, new SelectList(Model.phaseList, "Phaseid", "PhaseName"), htmlAttributes: new {  @class = "form-control", onclick = "fillModule();" })*@
+                                                                </td>
+                                                                <td align="center" width="30%">
+                                                                    <table id="Table6" cellspacing="1" cellpadding="1" width="98%" border="1">
+                                                                        <tr>
+                                                                            <td width="40%"><font face="Verdana" size="2">Phase:</font></td>
+                                                                            <td width="60%">
+                                                                                @*<asp:textbox id="txtPhase" tabIndex="3" runat="server" Font-Names="Verdana" ReadOnly="True"></asp:textbox>*@
+                                                                            <input type="text" id="txtPhase" style="font-family: Verdana;" tabindex="3" disabled />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="40%"><font face="Verdana" size="2">Time:</font></td>
+                                                                        <td width="60%">
+                                                                            @*<asp:textbox id="txtPhaseTime" tabIndex="4" runat="server" Font-Names="Verdana" Width="48px"></asp:textbox>*@
+                                                                            <input type="text" id="txtPhaseTime" style="font-family: Verdana; width:48px;" />&nbsp;<font face="Verdana" size="2">
+                                                                                Man
+                                                                                Days
+                                                                            </font>
+                                                                            <input type="hidden" name="hdnOptionVal" id="hdnOptionVal">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="center" width="100%" colspan="2">
+                                                                            <table id="Table8" width="98%">
+                                                                                <tr>
+                                                                                    <td width="33%">
+                                                                                        @*<asp:button id="btnPhaseAdd" tabIndex="5" runat="server" Font-Names="none" Width="60px" Text="Add"
+                                                                                            CssClass="SETBUTTON"></asp:button>*@
+                                                                                        <button id="btnPhaseAdd" name="Add" onclick="AddNwPhase();" type="submit" tabindex="5">Add</button>
+                                                                                    </td>
+                                                                                    <td width="33%">
+                                                                                        @*<asp:button id="btnPhaseModify" tabIndex="6" runat="server" Font-Names="none" Width="60px" Text="Modify"
+                                                                                            CssClass="SETBUTTON"></asp:button>*@
+                                                                                        <button id="btnPhaseModify" name="Modify" onclick="ModifyPhase();" type="submit" tabindex="5">Modify</button>
+                                                                                    </td>
+                                                                                    <td width="33%">
+                                                                                        @*<asp:button id="btnPhaseDelete" tabIndex="7" runat="server" Font-Names="none" Width="64px" Text="Remove"
+                                                                                            CssClass="SETBUTTON"></asp:button>*@
+                                                                                        <button id="btnPhaseDelete" name="Delete" onclick="RemovePhase();" type="submit" tabindex="5">Remove</button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <asp:literal id="litPhaseId" runat="server" Visible="False"></asp:literal>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                                @*<asp:label id="lblPhaseMsg" runat="server" ForeColor="Red" Visible="False" Font-Bold="True"></asp:label>*@
+                                                                    <label id="lblPhaseMsg" style="color:red;font-weight:bold;"></label>
+                                                                           </td>
+                                                            <td width="35%">
+                                                                @*@Html.ListBoxFor(s => s.SelectedPhases, new SelectList("", ""), new { id="txt"})*@
+                                                                @Html.DropDownList("lstbxPhasePrjtwise", new SelectList("", ""), htmlAttributes: new { id = "txt", @class = "form-control", onclick = "fillPhasePrjt();", size = 6 })
+
+                                                                @*<asp:listbox id="lstBUSelectedPhases" tabIndex="8" runat="server" AutoPostBack="True" Font-Names="Verdana"
+                                                                    Width="99%" Rows="7"></asp:listbox>*@
+
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" colspan="2">
+                                                    <table id="Table4" cellspacing="1" cellpadding="1" width="100%" border="1">
+                                                        <tbody>
+                                                            <tr bgcolor="#e6f2ff">
+                                                                <td class="format" valign="bottom" align="center" colspan="3">
+                                                                    <b>
+                                                                        <b>
+                                                                            <font face="Verdana" size="2">
+                                                                                Module/User Storage
+                                                                                Management
+                                                                            </font>
+                                                                        </b>
+                                                                    </b>
+                                                                </td>
+                                                            </tr>
+                                            </tr>
+                                            <tr>
+                                                <td width="15%"></td>
+                                                <td width="35%">
+                                                    @*<asp:checkbox id="chkModule" tabIndex="9" runat="server" Font-Names="Verdana" Font-Size="Smaller"
+                                                        Text="Include Module"></asp:checkbox>*@
+                                                    <input type="checkbox" name="chkModule" id="chkModule" value="Include_Module">Include Module
+                                                </td>
+                                                <td width="50%">
+                                                    <font face="Verdana" size="2">
+                                                        Available <strong>Module</strong>(s): <strong>
+                                                            Time
+                                                        </strong>(Man Days)
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="15%"><font face="Verdana" size="2">Module/User Storage :</font></td>
+                                                <td width="35%">
+                                                    @*<asp:textbox id="txtModule" tabIndex="10" runat="server" Font-Names="Verdana"></asp:textbox>*@
+                                                    <input type="text" id="txtItem" />
+                                                </td>
+                                                <td width="50%" rowspan="3">
+                                                    @*@Html.ListBoxFor(s => s.SelectedModuleID, new SelectList("", ""), new { id = "lstbxModule", @class = "lstbx", Multiple = "single", onclick = "fillModule();" })*@
+                                                    @Html.DropDownList("lstbxModule", new SelectList("", ""), htmlAttributes: new { @class = "form-control", onclick = "fillModule();" })
+                                                    @*<asp:listbox id="lstModule" tabIndex="15" runat="server" AutoPostBack="True" Font-Names="Verdana"
+                                                        Width="98%" Rows="7"></asp:listbox>*@
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><font face="Verdana" size="2">Time :</font></td>
+                                                <td>
+                                                    @*<asp:textbox id="txtModuleTime" tabIndex="11" runat="server" Font-Names="Verdana" Width="48px"></asp:textbox>*@
+                                                    <input type="text" id="txtModuleTime" />
+                                                    <input type="hidden" name="hdnModuleVal" id="hdnModuleVal">
+                                                </td>&nbsp;
+                                                <font face="Verdana" size="2">
+                                                    Man
+                                                    Days
+                                                </font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="2">
+                                    <table id="Table7">
+                                        <tr>
+                                            <td>
+                                                @*<asp:button id="btnModuleAdd" tabIndex="12" runat="server" Font-Names="none" Width="60px" Text="Add"
+                                                    CssClass="SETBUTTON"></asp:button>*@
+                                                <button id="btnModuleAdd" name="Add" onclick="AddNwModule();" type="submit" tabindex="12" style="font-family: none; width: 60px;">Add</button>
+                                            </td>
+                                            <td>
+                                                @*<asp:button id="btnModuleModify" tabIndex="13" runat="server" Font-Names="none" Width="60px"
+                                                    Text="Modify" CssClass="SETBUTTON"></asp:button>*@
+                                                <button id="btnModuleModify" name="Modify" onclick="ModifyModule();" type="submit" tabindex="13" style="font-family: none; width: 60px;">Modify</button>
+                                            </td>
+                                            <td>
+                                                @*<asp:button id="btnModuleDelete" tabIndex="14" runat="server" Font-Names="none" Width="60px"
+                                                    Text="Delete" CssClass="SETBUTTON"></asp:button>*@
+                                                <button id="btnModuleDelete" name="Delete" onclick="DeleteModule();" type="submit" tabindex="14" style="font-family: none; width: 60px;">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    @*<asp:label id="lblModuleMsg" runat="server" ForeColor="Red" Visible="False" Font-Bold="True"></asp:label>*@
+                                    <label id="lblModuleMsg" style="color:red;font-weight:bold"></label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr bgcolor="#e6f2ff">
+                <td class="format" valign="bottom" align="center" colspan="2">
+                    <b>
+                        <font face="Verdana" size="2">
+                            Task
+                            Management
+                        </font>
+                    </b>
+                </td>
+            </tr>
+            <tr>
+                <td class="format" valign="bottom" align="center" colspan="2">
+                    <table id="Table9" cellspacing="0" cellpadding="0" width="100%" border="1">
+                        <tr>
+                            <td width="50%" colspan="2"><font face="Verdana" size="2">Select Task(s)</font></td>
+                            <td width="50%" colspan="2"><font face="Verdana" size="2">Selected Task(s)</font></td>
+                        </tr>
+                        <tr>
+                            <td width="45%">
+                                @Html.ListBoxFor(s => s.Selectedtasks, new SelectList(Model.taskList, "ProjTask_Id", "TaskName"), new { id = "lstBxAllTask" })
+                                @*<asp:listbox id="lstBUTasks" tabIndex="16" runat="server" Font-Names="Verdana" Width="100%" Rows="7"
+                                    SelectionMode="Multiple"></asp:listbox>*@
+                            </td>
+                            <td valign="middle" align="center" width="5%">
+                                <p>
+                                    @*<asp:imagebutton id="imgTaskRight" runat="server" ImageUrl="../images/right.gif" Height="20px"></asp:imagebutton><br>
+                                        <asp:imagebutton id="imgTaskLeft" runat="server" ImageUrl="../images/left.gif" Height="20px"></asp:imagebutton><br>
+                                        <asp:imagebutton id="imgTaskRightAll" runat="server" ImageUrl="../images/rightAll.gif" Height="20px"></asp:imagebutton><br>
+                                        <asp:imagebutton id="imgTaskLeftAll" runat="server" ImageUrl="../images/leftAll.gif" Height="20px"></asp:imagebutton>*@
+                                    <button id="btnRight" name="btnRight" type="submit" tabindex="14" style="font-family: none; Height: 20px;">></button><br>
+                                    <button id="btnLeft" name="btnLeft" type="submit" tabindex="14" style="font-family: none; Height: 20px;"><</button><br>
+                                    <button id="btnRightAll" name="btnRightAll" type="submit" tabindex="14" style="font-family: none; Height: 20px;">>></button><br>
+                                    <button id="btnLeftAll" name="btnLeftAll" type="submit" tabindex="14" style="font-family: none; Height: 20px;"><<</button><br>
+                                </p>
+                            </td>
+                            <td width="45%">
+                                @Html.ListBoxFor(s => s.Selectedtasks, new SelectList("", ""), new { id = "lstBxTaskSelect" })
+                                @*<asp:listbox id="lstBUSelectedTasks" tabIndex="16" runat="server" Font-Names="Verdana" Width="100%"
+                                    Rows="7" SelectionMode="Multiple"></asp:listbox>*@
+                            </td>
+                            <td width="5%">
+                                <p>
+                                    @*<asp:imagebutton id="imgTaskUp" runat="server" ImageUrl="../images/up.gif" Height="20px"></asp:imagebutton><br>
+                                    <asp:imagebutton id="imgTaskDown" runat="server" ImageUrl="../images/down.gif" Height="20px"></asp:imagebutton>*@
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td class="format" valign="bottom" align="center" colspan="2"></td>
+            </tr>
+            <tr bgcolor="#e6f2ff">
+                <td class="format" valign="bottom" align="center" colspan="2">
+                    <b>
+                        <font face="Verdana" size="2">
+                            Team
+                            Management
+                        </font>
+                    </b>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" width="80%" colspan="2">
+                    <table id="TableTeamMember" height="98%" cellspacing="0" cellpadding="0" width="80%" align="center"
+                           border="1">
+                        <tr>
+                            <td class="format" valign="top" align="left"><font face="Verdana" size="2">Team Leader:</font></td>
+                            <td>
+                                <font face="Verdana" size="2">
+                                    @*<asp:dropdownlist id="ddlEmployee" tabIndex="18" runat="server" Font-Names="Verdana"></asp:dropdownlist>*@
+                                    @Html.DropDownListFor(m => m.SelectedEmployeeTL, new SelectList(Model.EmployeeList, "Emp_Id", "EmployeeName"), "--Select Team Leader--", new { id = "ddlTeamLeader" })
+                                    @Html.DropDownListFor(m => m.SelectedEmployeePM, new SelectList(Model.EmployeeList, "Emp_Id", "EmployeeName"), "--Select Project Manager--", new { id = "ddlPM" })
+                                </font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" width="95%" colspan="2">
+                                <table id="Table16" width="95%">
+                                    <tr>
+                                        <td bgcolor="#e6f2ff" colspan="3"><font face="Verdana" size="2">Team Allocation:</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="47%">
+                                            <font size="2">Filter Members By (Business Unit): </font>
+                                        </td>
+                                        <td valign="top" align="left" colspan="2">
+                                            @*<asp:dropdownlist id="ddlBusinessUnit" runat="server" AutoPostBack="True" Font-Names="Verdana" Width="95%"></asp:dropdownlist>*@
+                                            @Html.DropDownListFor(m => m.SelectedBusinessUnit, new SelectList(Model.unitList, "Unit_id", "Unit_name"), "--Select All Business Unit--", new { id = "ddlBusinessUnit", onchange = "EmployeeBusinsUnitWise();" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="47%">
+                                            @Html.ListBoxFor(s => s.SelectedEmployees, new SelectList(Model.EmployeeList, "Emp_Id", "EmployeeName"))
+                                            @*<asp:listbox id="lstAllBUEmp" tabIndex="19" runat="server" Font-Names="Verdana" Width="100%"
+                                                Rows="7" SelectionMode="Multiple"></asp:listbox>*@
+                                        </td>
+                                        <td style="WIDTH: 30px" valign="top" align="center" width="30">
+                                            <br>
+                                            <p>
+                                                @*<asp:imagebutton id="imgTeamRight" runat="server" ImageUrl="../images/right.gif" Height="20px"></asp:imagebutton><br>
+                                                    <asp:imagebutton id="imgTeamLeft" runat="server" ImageUrl="../images/left.gif" Height="20px"></asp:imagebutton><br>
+                                                    <asp:imagebutton id="imgTeamRightAll" runat="server" ImageUrl="../images/rightAll.gif" Height="20px"></asp:imagebutton><br>
+                                                    <asp:imagebutton id="imgTeamLeftAll" runat="server" ImageUrl="../images/leftAll.gif" Height="20px"></asp:imagebutton>*@
+                                                <button id="btnRightTeam" name="btnRightTeam" type="submit" tabindex="14" style="font-family: none; Height: 20px;">></button><br>
+                                                <button id="btnLeftTeam" name="btnLeftTeam" type="submit" tabindex="14" style="font-family: none; Height: 20px;"><</button><br>
+                                                <button id="btnRightAllTeam" name="btnRightAllTeam" type="submit" tabindex="14" style="font-family: none; Height: 20px;">>></button><br>
+                                                <button id="btnLeftAllTeam" name="btnLeftAllTeam" type="submit" tabindex="14" style="font-family: none; Height: 20px;"><<</button><br>
+                                            </p>
+                                        </td>
+                                        <td width="47%">
+                                            @*@Html.ListBoxFor(s => s.SelectedEmployees, new SelectList("ID", "EmployeeName"), new { id = "lstBxEmplyeProjectWise"})*@
+                                            @Html.ListBoxFor(s => s.SelectedEmployees, new SelectList("", ""), new { id = "lstBxEmplyeProjectWise" })
+                                            @*<asp:listbox id="lstAllBUTeamEmp" tabIndex="20" runat="server" Font-Names="Verdana" Width="100%"
+                                                Rows="7" SelectionMode="Multiple"></asp:listbox></SELECT>*@
+                                        </td>
+                                    </tr>
+                                </table>
+                                <asp:literal id="litLastControl" runat="server" Visible="False"></asp:literal>
+                            </td>
+                        <tr>
+                            <td align="center" colspan="2">
+                                @*<asp:button id="btnSave" tabIndex="21" runat="server" Font-Names="none" Text="Save Configuration"
+                                    CssClass="SETBUTTON"></asp:button>*@
+                                <button id="btnSave" name="btnSave" type="submit" tabindex="14" style="font-family: none; Height: 20px;" onclick="SubmitData();">Save Configuration</button><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span id="spnMsg"></span>
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+        <div id="loading">
+            <img src="~/Css/Images/loading.gif" />
+        </div>
+        </center>
+    @*</td>
+    </tr>
+    </tbody>
+    </table>*@
+    <style type="text/css">
+        #loading { opacity:0.7;
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+        }
+
+            #loading img { position: absolute;
+                width: 100px;
+                top: 50% !important;
+                left: 50%;
+                margin-top: -50px !important;
+                margin-left: -50px !important;
+            }
+    </style>
+
+</div>
+@*</form>*@
+<link href="~/Css/jquery-ui.css" rel="stylesheet" />
+@*<link href="~/Css/Images/loading" rel="stylesheet" />*@
+<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jQuery-plugin-progressbar.js"></script>
+<script src="~/Scripts/ProjectConfig.js"></script>

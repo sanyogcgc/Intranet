@@ -1,0 +1,558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{56B7DF58-70AB-41E6-84A4-C18097930F15}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAccess</RootNamespace>
+    <AssemblyName>DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="DAL\BaseDa.cs" />
+    <Compile Include="DAL\EmployeeDa.cs" />
+    <Compile Include="DAL\ProjectConfigDa.cs" />
+    <Compile Include="DAL\ProjectDa.cs" />
+    <Compile Include="DAL\InvoiceDa.cs" />
+    <Compile Include="DAL\ReportsDa.cs" />
+    <Compile Include="DAL\ResourceUtilizationDa.cs" />
+    <Compile Include="Models\Acceptance.cs" />
+    <Compile Include="Models\AccessRight.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\ADEmployee.cs" />
+    <Compile Include="Models\AttendanceApproval.cs" />
+    <Compile Include="Models\AttendanceAppStatu.cs" />
+    <Compile Include="Models\b.cs" />
+    <Compile Include="Models\bdtarget.cs" />
+    <Compile Include="Models\bktracking.cs" />
+    <Compile Include="Models\book.cs" />
+    <Compile Include="Models\BooksIssueReceive.cs" />
+    <Compile Include="Models\BooksIssueReceiveNw.cs" />
+    <Compile Include="Models\BooksNw.cs" />
+    <Compile Include="Models\BussDev.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\category1.cs" />
+    <Compile Include="Models\Category_For_RDB.cs" />
+    <Compile Include="Models\Cat_SubCat_For_RDB.cs" />
+    <Compile Include="Models\CauseMaster.cs" />
+    <Compile Include="Models\cd.cs" />
+    <Compile Include="Models\cdtracking.cs" />
+    <Compile Include="Models\cfReport.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\CommTrck.cs" />
+    <Compile Include="Models\Communication.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\Designation.cs" />
+    <Compile Include="Models\directory_category.cs" />
+    <Compile Include="Models\directory_country.cs" />
+    <Compile Include="Models\directory_subcategory.cs" />
+    <Compile Include="Models\dtproperty.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EmployeeDetail.cs" />
+    <Compile Include="Models\EmployeeLeave.cs" />
+    <Compile Include="Models\EmployeeLeaveStatu.cs" />
+    <Compile Include="Models\empunit.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Event_Detail.cs" />
+    <Compile Include="Models\Expens.cs" />
+    <Compile Include="Models\Exp_Category.cs" />
+    <Compile Include="Models\Exp_Sub_Category.cs" />
+    <Compile Include="Models\FeedbackManagment.cs" />
+    <Compile Include="Models\file.cs" />
+    <Compile Include="Models\FinYearMaster.cs" />
+    <Compile Include="Models\GroupCategory.cs" />
+    <Compile Include="Models\GroupCatStatu.cs" />
+    <Compile Include="Models\GroupUserMapping.cs" />
+    <Compile Include="Models\Holiday.cs" />
+    <Compile Include="Models\Idea.cs" />
+    <Compile Include="Models\ILink.cs" />
+    <Compile Include="Models\Impact_For_RDB.cs" />
+    <Compile Include="Models\ImpIssue_For_RDB.cs" />
+    <Compile Include="Models\InterestArea.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\IParentLink.cs" />
+    <Compile Include="Models\IshirGroup.cs" />
+    <Compile Include="ISHIRINTRANETContext.cs" />
+    <Compile Include="Models\ishirnew.cs" />
+    <Compile Include="Models\Issue.cs" />
+    <Compile Include="Models\LeadMaster.cs" />
+    <Compile Include="Models\LeadMaster1.cs" />
+    <Compile Include="Models\Leadsource.cs" />
+    <Compile Include="Models\LeaveCategory.cs" />
+    <Compile Include="Models\LeaveCLSLTable.cs" />
+    <Compile Include="Models\LeaveEmployeeStatusRecord.cs" />
+    <Compile Include="Models\LeaveGrant.cs" />
+    <Compile Include="Models\LeaveReportingGroup.cs" />
+    <Compile Include="Models\LeaveRequest.cs" />
+    <Compile Include="Models\Leaverequesttransaction.cs" />
+    <Compile Include="Models\LeaveStatusMaster.cs" />
+    <Compile Include="Models\LeaveType.cs" />
+    <Compile Include="Models\Likelihood_For_RDB.cs" />
+    <Compile Include="Models\MailSetting.cs" />
+    <Compile Include="Models\Mapping\AcceptanceMap.cs" />
+    <Compile Include="Models\Mapping\AccessRightMap.cs" />
+    <Compile Include="Models\Mapping\AccountMap.cs" />
+    <Compile Include="Models\Mapping\ADEmployeeMap.cs" />
+    <Compile Include="Models\Mapping\AttendanceApprovalMap.cs" />
+    <Compile Include="Models\Mapping\AttendanceAppStatuMap.cs" />
+    <Compile Include="Models\Mapping\bdtargetMap.cs" />
+    <Compile Include="Models\Mapping\bktrackingMap.cs" />
+    <Compile Include="Models\Mapping\bMap.cs" />
+    <Compile Include="Models\Mapping\bookMap.cs" />
+    <Compile Include="Models\Mapping\BooksIssueReceiveMap.cs" />
+    <Compile Include="Models\Mapping\BooksIssueReceiveNwMap.cs" />
+    <Compile Include="Models\Mapping\BooksNwMap.cs" />
+    <Compile Include="Models\Mapping\BussDevMap.cs" />
+    <Compile Include="Models\Mapping\category1Map.cs" />
+    <Compile Include="Models\Mapping\CategoryMap.cs" />
+    <Compile Include="Models\Mapping\Category_For_RDBMap.cs" />
+    <Compile Include="Models\Mapping\Cat_SubCat_For_RDBMap.cs" />
+    <Compile Include="Models\Mapping\CauseMasterMap.cs" />
+    <Compile Include="Models\Mapping\cdMap.cs" />
+    <Compile Include="Models\Mapping\cdtrackingMap.cs" />
+    <Compile Include="Models\Mapping\cfReportMap.cs" />
+    <Compile Include="Models\Mapping\CityMap.cs" />
+    <Compile Include="Models\Mapping\ClientMap.cs" />
+    <Compile Include="Models\Mapping\CommTrckMap.cs" />
+    <Compile Include="Models\Mapping\CommunicationMap.cs" />
+    <Compile Include="Models\Mapping\CountryMap.cs" />
+    <Compile Include="Models\Mapping\CurrencyMap.cs" />
+    <Compile Include="Models\Mapping\DesignationMap.cs" />
+    <Compile Include="Models\Mapping\directory_categoryMap.cs" />
+    <Compile Include="Models\Mapping\directory_countryMap.cs" />
+    <Compile Include="Models\Mapping\directory_subcategoryMap.cs" />
+    <Compile Include="Models\Mapping\dtpropertyMap.cs" />
+    <Compile Include="Models\Mapping\EmployeeDetail.cs" />
+    <Compile Include="Models\Mapping\EmployeeLeaveMap.cs" />
+    <Compile Include="Models\Mapping\EmployeeLeaveStatuMap.cs" />
+    <Compile Include="Models\Mapping\EmployeeMap.cs" />
+    <Compile Include="Models\Mapping\empunitMap.cs" />
+    <Compile Include="Models\Mapping\EventMap.cs" />
+    <Compile Include="Models\Mapping\Event_DetailMap.cs" />
+    <Compile Include="Models\Mapping\ExpensMap.cs" />
+    <Compile Include="Models\Mapping\Exp_CategoryMap.cs" />
+    <Compile Include="Models\Mapping\Exp_Sub_CategoryMap.cs" />
+    <Compile Include="Models\Mapping\FeedbackManagmentMap.cs" />
+    <Compile Include="Models\Mapping\fileMap.cs" />
+    <Compile Include="Models\Mapping\FinYearMasterMap.cs" />
+    <Compile Include="Models\Mapping\GroupCategoryMap.cs" />
+    <Compile Include="Models\Mapping\GroupCatStatuMap.cs" />
+    <Compile Include="Models\Mapping\GroupUserMappingMap.cs" />
+    <Compile Include="Models\Mapping\HolidayMap.cs" />
+    <Compile Include="Models\Mapping\IdeaMap.cs" />
+    <Compile Include="Models\Mapping\ILinkMap.cs" />
+    <Compile Include="Models\Mapping\Impact_For_RDBMap.cs" />
+    <Compile Include="Models\Mapping\ImpIssue_For_RDBMap.cs" />
+    <Compile Include="Models\Mapping\InterestAreaMap.cs" />
+    <Compile Include="Models\Mapping\IParentLinkMap.cs" />
+    <Compile Include="Models\Mapping\IshirGroupMap.cs" />
+    <Compile Include="Models\Mapping\ishirnewMap.cs" />
+    <Compile Include="Models\Mapping\IssueMap.cs" />
+    <Compile Include="Models\Mapping\LeadMaster1Map.cs" />
+    <Compile Include="Models\Mapping\LeadMasterMap.cs" />
+    <Compile Include="Models\Mapping\LeadsourceMap.cs" />
+    <Compile Include="Models\Mapping\LeaveCategoryMap.cs" />
+    <Compile Include="Models\Mapping\LeaveCLSLTableMap.cs" />
+    <Compile Include="Models\Mapping\LeaveEmployeeStatusRecordMap.cs" />
+    <Compile Include="Models\Mapping\LeaveGrantMap.cs" />
+    <Compile Include="Models\Mapping\LeaveReportingGroupMap.cs" />
+    <Compile Include="Models\Mapping\LeaveRequestMap.cs" />
+    <Compile Include="Models\Mapping\LeaverequesttransactionMap.cs" />
+    <Compile Include="Models\Mapping\LeaveStatusMasterMap.cs" />
+    <Compile Include="Models\Mapping\LeaveTypeMap.cs" />
+    <Compile Include="Models\Mapping\Likelihood_For_RDBMap.cs" />
+    <Compile Include="Models\Mapping\MailSettingMap.cs" />
+    <Compile Include="Models\Mapping\ModuleMap.cs" />
+    <Compile Include="Models\Mapping\MonthlyRevExpMap.cs" />
+    <Compile Include="Models\Mapping\Monthly_WorkLogDataMap.cs" />
+    <Compile Include="Models\Mapping\Monthly_WorkLogData_ProjectwiseMap.cs" />
+    <Compile Include="Models\Mapping\MonthMasterMap.cs" />
+    <Compile Include="Models\Mapping\mrf_insertDataMap.cs" />
+    <Compile Include="Models\Mapping\NCAttachementMap.cs" />
+    <Compile Include="Models\Mapping\NCDetailMap.cs" />
+    <Compile Include="Models\Mapping\NCDetailsHistoryMap.cs" />
+    <Compile Include="Models\Mapping\NCMasterMap.cs" />
+    <Compile Include="Models\Mapping\NCProcessMap.cs" />
+    <Compile Include="Models\Mapping\NCSTypeMap.cs" />
+    <Compile Include="Models\Mapping\NCTrendAnalysiMap.cs" />
+    <Compile Include="Models\Mapping\PatOnTheBackAwardMap.cs" />
+    <Compile Include="Models\Mapping\PaymentReceiptMap.cs" />
+    <Compile Include="Models\Mapping\PaymentTypeMap.cs" />
+    <Compile Include="Models\Mapping\PeriodMasterMap.cs" />
+    <Compile Include="Models\Mapping\PFReportMap.cs" />
+    <Compile Include="Models\Mapping\PhaseMap.cs" />
+    <Compile Include="Models\Mapping\PRARatingMap.cs" />
+    <Compile Include="Models\Mapping\PriorityMap.cs" />
+    <Compile Include="Models\Mapping\prjsubtypeMap.cs" />
+    <Compile Include="Models\Mapping\PrjTypeMap.cs" />
+    <Compile Include="Models\Mapping\ProjActivityMap.cs" />
+    <Compile Include="Models\Mapping\ProjectMap.cs" />
+    <Compile Include="Models\Mapping\ProjectTimeMap.cs" />
+    <Compile Include="Models\Mapping\ProjectTypeMap.cs" />
+    <Compile Include="Models\Mapping\ProjLeadMap.cs" />
+    <Compile Include="Models\Mapping\ProjMemberMap.cs" />
+    <Compile Include="Models\Mapping\ProjMilestoneMap.cs" />
+    <Compile Include="Models\Mapping\ProjModuleMap.cs" />
+    <Compile Include="Models\Mapping\ProjTaskMap.cs" />
+    <Compile Include="Models\Mapping\ProjTaskMapingMap.cs" />
+    <Compile Include="Models\Mapping\ProposalMap.cs" />
+    <Compile Include="Models\Mapping\ReasonDeadMap.cs" />
+    <Compile Include="Models\Mapping\ReceiptUnitMap.cs" />
+    <Compile Include="Models\Mapping\ReceptionANDLibraryMap.cs" />
+    <Compile Include="Models\Mapping\ResourceConfigurationMap.cs" />
+    <Compile Include="Models\Mapping\ResourceUtilizationMap.cs" />
+    <Compile Include="Models\Mapping\ResponsMap.cs" />
+    <Compile Include="Models\Mapping\RevenueMap.cs" />
+    <Compile Include="Models\Mapping\Risks_For_RDBMap.cs" />
+    <Compile Include="Models\Mapping\RockStarForBUHMap.cs" />
+    <Compile Include="Models\Mapping\RockStarForHRGMap.cs" />
+    <Compile Include="Models\Mapping\RockStarForRMMap.cs" />
+    <Compile Include="Models\Mapping\SalaryMap.cs" />
+    <Compile Include="Models\Mapping\sampEmpMap.cs" />
+    <Compile Include="Models\Mapping\sampTarUserMap.cs" />
+    <Compile Include="Models\Mapping\SAM_GroupMap.cs" />
+    <Compile Include="Models\Mapping\SAM_RoleMap.cs" />
+    <Compile Include="Models\Mapping\SChildLinkMap.cs" />
+    <Compile Include="Models\Mapping\SecurityMap.cs" />
+    <Compile Include="Models\Mapping\settingMap.cs" />
+    <Compile Include="Models\Mapping\SGroupMap.cs" />
+    <Compile Include="Models\Mapping\SkillCategoryMap.cs" />
+    <Compile Include="Models\Mapping\SkillMap.cs" />
+    <Compile Include="Models\Mapping\SkillSubCategoryMap.cs" />
+    <Compile Include="Models\Mapping\Source_For_RDBMap.cs" />
+    <Compile Include="Models\Mapping\SParent_LinksMap.cs" />
+    <Compile Include="Models\Mapping\SRoleMap.cs" />
+    <Compile Include="Models\Mapping\StatusMap.cs" />
+    <Compile Include="Models\Mapping\StatusMasterMap.cs" />
+    <Compile Include="Models\Mapping\Status_For_RDBMap.cs" />
+    <Compile Include="Models\Mapping\SubCat_For_RDBMap.cs" />
+    <Compile Include="Models\Mapping\SubUnitMap.cs" />
+    <Compile Include="Models\Mapping\support_insertTableMap.cs" />
+    <Compile Include="Models\Mapping\targetunitMap.cs" />
+    <Compile Include="Models\Mapping\TarTypeMap.cs" />
+    <Compile Include="Models\Mapping\taruserMap.cs" />
+    <Compile Include="Models\Mapping\TaxMap.cs" />
+    <Compile Include="Models\Mapping\tblAPMasterMap.cs" />
+    <Compile Include="Models\Mapping\tblbcmasterMap.cs" />
+    <Compile Include="Models\Mapping\tblBDMasterMap.cs" />
+    <Compile Include="Models\Mapping\tblCatagoryMap.cs" />
+    <Compile Include="Models\Mapping\tblClientMaster1Map.cs" />
+    <Compile Include="Models\Mapping\tblCostAllocationMap.cs" />
+    <Compile Include="Models\Mapping\tblcostsmasterMap.cs" />
+    <Compile Include="Models\Mapping\tblCurrencyExchangeMap.cs" />
+    <Compile Include="Models\Mapping\tblCurrencyMasterMap.cs" />
+    <Compile Include="Models\Mapping\tblGeographyMasterMap.cs" />
+    <Compile Include="Models\Mapping\tblIpcCatMap.cs" />
+    <Compile Include="Models\Mapping\tblIpcQueMap.cs" />
+    <Compile Include="Models\Mapping\tblIpcRatingMap.cs" />
+    <Compile Include="Models\Mapping\tblIpcResponseMap.cs" />
+    <Compile Include="Models\Mapping\tblIpcSubcatMap.cs" />
+    <Compile Include="Models\Mapping\tblIpcSubjectiveQueMap.cs" />
+    <Compile Include="Models\Mapping\tblIpcSubjResponseMap.cs" />
+    <Compile Include="Models\Mapping\tblLeadSourceMasterMap.cs" />
+    <Compile Include="Models\Mapping\TblMilestoneServiceMap.cs" />
+    <Compile Include="Models\Mapping\tblMonthMasterMap.cs" />
+    <Compile Include="Models\Mapping\tblPaymentMasterMap.cs" />
+    <Compile Include="Models\Mapping\tblProjectDurationDetailMap.cs" />
+    <Compile Include="Models\Mapping\tblProjectMilestoneDetails1Map.cs" />
+    <Compile Include="Models\Mapping\tblSalesMaster1Map.cs" />
+    <Compile Include="Models\Mapping\tblSalesTeamMasterMap.cs" />
+    <Compile Include="Models\Mapping\tblSalesTeamMemberMap.cs" />
+    <Compile Include="Models\Mapping\tblServicesMasterMap.cs" />
+    <Compile Include="Models\Mapping\tblStatusMasterMap.cs" />
+    <Compile Include="Models\Mapping\tblTrainingMap.cs" />
+    <Compile Include="Models\Mapping\tbltypemasterMap.cs" />
+    <Compile Include="Models\Mapping\tbl_Resoure_Non_DefaulterMap.cs" />
+    <Compile Include="Models\Mapping\tbl_SystemDownMap.cs" />
+    <Compile Include="Models\Mapping\TB_MONEYMap.cs" />
+    <Compile Include="Models\Mapping\tb_prafeedbackMap.cs" />
+    <Compile Include="Models\Mapping\tb_prainitiativesMap.cs" />
+    <Compile Include="Models\Mapping\tb_praMap.cs" />
+    <Compile Include="Models\Mapping\tb_praStatusMap.cs" />
+    <Compile Include="Models\Mapping\tb_trainee_feedbackMap.cs" />
+    <Compile Include="Models\Mapping\tb_trainer_feedbackMap.cs" />
+    <Compile Include="Models\Mapping\TDMap.cs" />
+    <Compile Include="Models\Mapping\TechnologyGroupMap.cs" />
+    <Compile Include="Models\Mapping\TempEmployeeMap.cs" />
+    <Compile Include="Models\Mapping\temptimelogMap.cs" />
+    <Compile Include="Models\Mapping\testMap.cs" />
+    <Compile Include="Models\Mapping\timelogMap.cs" />
+    <Compile Include="Models\Mapping\timespentlogMap.cs" />
+    <Compile Include="Models\Mapping\tmpRequestMasterMap.cs" />
+    <Compile Include="Models\Mapping\Tools_ManualMap.cs" />
+    <Compile Include="Models\Mapping\TraineeMap.cs" />
+    <Compile Include="Models\Mapping\traing_linkTableMap.cs" />
+    <Compile Include="Models\Mapping\trainingcalenderFormMap.cs" />
+    <Compile Include="Models\Mapping\trainingrequestMap.cs" />
+    <Compile Include="Models\Mapping\TransactionMap.cs" />
+    <Compile Include="Models\Mapping\TransactionMasterMap.cs" />
+    <Compile Include="Models\Mapping\TrgCategoryMap.cs" />
+    <Compile Include="Models\Mapping\TrgEligibilityMap.cs" />
+    <Compile Include="Models\Mapping\TrgParticipantMap.cs" />
+    <Compile Include="Models\Mapping\TrgRegistrationMap.cs" />
+    <Compile Include="Models\Mapping\TrgScheduleMap.cs" />
+    <Compile Include="Models\Mapping\TrgTestMap.cs" />
+    <Compile Include="Models\Mapping\TrgTrainerMap.cs" />
+    <Compile Include="Models\Mapping\TrgTrainingMap.cs" />
+    <Compile Include="Models\Mapping\TrgVenueMap.cs" />
+    <Compile Include="Models\Mapping\unitimageMap.cs" />
+    <Compile Include="Models\Mapping\unitMap.cs" />
+    <Compile Include="Models\Mapping\UnitMasterMap.cs" />
+    <Compile Include="Models\Mapping\UNIT_SPECIFICMap.cs" />
+    <Compile Include="Models\Mapping\UserlogMap.cs" />
+    <Compile Include="Models\Mapping\v1Map.cs" />
+    <Compile Include="Models\Mapping\vCommTrckDetMap.cs" />
+    <Compile Include="Models\Mapping\vCurrentDateTimeMap.cs" />
+    <Compile Include="Models\Mapping\VendorMap.cs" />
+    <Compile Include="Models\Mapping\VIEW1Map.cs" />
+    <Compile Include="Models\Mapping\VIEW1sMap.cs" />
+    <Compile Include="Models\Mapping\VIEW5Map.cs" />
+    <Compile Include="Models\Mapping\VIEW7Map.cs" />
+    <Compile Include="Models\Mapping\ViewProjectMap.cs" />
+    <Compile Include="Models\Mapping\vPrjTimeMap.cs" />
+    <Compile Include="Models\Mapping\VwAllIssuedBookMap.cs" />
+    <Compile Include="Models\Mapping\VwAllMissedBookMap.cs" />
+    <Compile Include="Models\Mapping\vw_LostBooksAllMap.cs" />
+    <Compile Include="Models\Mapping\vw_LostBooksMap.cs" />
+    <Compile Include="Models\Mapping\vw_ModulewisePlannedEffortsMap.cs" />
+    <Compile Include="Models\Mapping\vw_ModulewiseVarianceMap.cs" />
+    <Compile Include="Models\Mapping\vw_Project_Audit_NCMap.cs" />
+    <Compile Include="Models\Mapping\vw_QuarterlyAuditMap.cs" />
+    <Compile Include="Models\Mapping\vw_VariancePhasewiseMap.cs" />
+    <Compile Include="Models\Mapping\vw_WorkLogDefaulterMap.cs" />
+    <Compile Include="Models\Mapping\WorkLog1Map.cs" />
+    <Compile Include="Models\Mapping\worklogMap.cs" />
+    <Compile Include="Models\Module.cs" />
+    <Compile Include="Models\MonthlyRevExp.cs" />
+    <Compile Include="Models\Monthly_WorkLogData.cs" />
+    <Compile Include="Models\Monthly_WorkLogData_Projectwise.cs" />
+    <Compile Include="Models\MonthMaster.cs" />
+    <Compile Include="Models\mrf_insertData.cs" />
+    <Compile Include="Models\NCAttachement.cs" />
+    <Compile Include="Models\NCDetail.cs" />
+    <Compile Include="Models\NCDetailsHistory.cs" />
+    <Compile Include="Models\NCMaster.cs" />
+    <Compile Include="Models\NCProcess.cs" />
+    <Compile Include="Models\NCSType.cs" />
+    <Compile Include="Models\NCTrendAnalysi.cs" />
+    <Compile Include="Models\PatOnTheBackAward.cs" />
+    <Compile Include="Models\PaymentReceipt.cs" />
+    <Compile Include="Models\PaymentType.cs" />
+    <Compile Include="Models\PeriodMaster.cs" />
+    <Compile Include="Models\PFReport.cs" />
+    <Compile Include="Models\Phase.cs" />
+    <Compile Include="Models\PRARating.cs" />
+    <Compile Include="Models\Priority.cs" />
+    <Compile Include="Models\prjsubtype.cs" />
+    <Compile Include="Models\PrjType.cs" />
+    <Compile Include="Models\ProjActivity.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectTime.cs" />
+    <Compile Include="Models\ProjectType.cs" />
+    <Compile Include="Models\ProjLead.cs" />
+    <Compile Include="Models\ProjMember.cs" />
+    <Compile Include="Models\ProjMilestone.cs" />
+    <Compile Include="Models\ProjModule.cs" />
+    <Compile Include="Models\ProjTask.cs" />
+    <Compile Include="Models\ProjTaskMaping.cs" />
+    <Compile Include="Models\Proposal.cs" />
+    <Compile Include="Models\ReasonDead.cs" />
+    <Compile Include="Models\ReceiptUnit.cs" />
+    <Compile Include="Models\ReceptionANDLibrary.cs" />
+    <Compile Include="Models\ResourceConfiguration.cs" />
+    <Compile Include="Models\ResourceUtilization.cs" />
+    <Compile Include="Models\Respons.cs" />
+    <Compile Include="Models\Revenue.cs" />
+    <Compile Include="Models\Risks_For_RDB.cs" />
+    <Compile Include="Models\RockStarForBUH.cs" />
+    <Compile Include="Models\RockStarForHRG.cs" />
+    <Compile Include="Models\RockStarForRM.cs" />
+    <Compile Include="Models\Salary.cs" />
+    <Compile Include="Models\sampEmp.cs" />
+    <Compile Include="Models\sampTarUser.cs" />
+    <Compile Include="Models\SAM_Group.cs" />
+    <Compile Include="Models\SAM_Role.cs" />
+    <Compile Include="Models\SChildLink.cs" />
+    <Compile Include="Models\Security.cs" />
+    <Compile Include="Models\setting.cs" />
+    <Compile Include="Models\SGroup.cs" />
+    <Compile Include="Models\Skill.cs" />
+    <Compile Include="Models\SkillCategory.cs" />
+    <Compile Include="Models\SkillSubCategory.cs" />
+    <Compile Include="Models\Source_For_RDB.cs" />
+    <Compile Include="Models\SParent_Links.cs" />
+    <Compile Include="Models\SRole.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\StatusMaster.cs" />
+    <Compile Include="Models\Status_For_RDB.cs" />
+    <Compile Include="Models\SubCat_For_RDB.cs" />
+    <Compile Include="Models\SubUnit.cs" />
+    <Compile Include="Models\support_insertTable.cs" />
+    <Compile Include="Models\targetunit.cs" />
+    <Compile Include="Models\TarType.cs" />
+    <Compile Include="Models\taruser.cs" />
+    <Compile Include="Models\Tax.cs" />
+    <Compile Include="Models\tblAPMaster.cs" />
+    <Compile Include="Models\tblbcmaster.cs" />
+    <Compile Include="Models\tblBDMaster.cs" />
+    <Compile Include="Models\tblCatagory.cs" />
+    <Compile Include="Models\tblClientMaster1.cs" />
+    <Compile Include="Models\tblCostAllocation.cs" />
+    <Compile Include="Models\tblcostsmaster.cs" />
+    <Compile Include="Models\tblCurrencyExchange.cs" />
+    <Compile Include="Models\tblCurrencyMaster.cs" />
+    <Compile Include="Models\tblGeographyMaster.cs" />
+    <Compile Include="Models\tblIpcCat.cs" />
+    <Compile Include="Models\tblIpcQue.cs" />
+    <Compile Include="Models\tblIpcRating.cs" />
+    <Compile Include="Models\tblIpcResponse.cs" />
+    <Compile Include="Models\tblIpcSubcat.cs" />
+    <Compile Include="Models\tblIpcSubjectiveQue.cs" />
+    <Compile Include="Models\tblIpcSubjResponse.cs" />
+    <Compile Include="Models\tblLeadSourceMaster.cs" />
+    <Compile Include="Models\TblMilestoneService.cs" />
+    <Compile Include="Models\tblMonthMaster.cs" />
+    <Compile Include="Models\tblPaymentMaster.cs" />
+    <Compile Include="Models\tblProjectDurationDetail.cs" />
+    <Compile Include="Models\tblProjectMilestoneDetails1.cs" />
+    <Compile Include="Models\tblSalesMaster1.cs" />
+    <Compile Include="Models\tblSalesTeamMaster.cs" />
+    <Compile Include="Models\tblSalesTeamMember.cs" />
+    <Compile Include="Models\tblServicesMaster.cs" />
+    <Compile Include="Models\tblStatusMaster.cs" />
+    <Compile Include="Models\tblTraining.cs" />
+    <Compile Include="Models\tbltypemaster.cs" />
+    <Compile Include="Models\tbl_Resoure_Non_Defaulter.cs" />
+    <Compile Include="Models\tbl_SystemDown.cs" />
+    <Compile Include="Models\TB_MONEY.cs" />
+    <Compile Include="Models\tb_pra.cs" />
+    <Compile Include="Models\tb_prafeedback.cs" />
+    <Compile Include="Models\tb_prainitiatives.cs" />
+    <Compile Include="Models\tb_praStatus.cs" />
+    <Compile Include="Models\tb_trainee_feedback.cs" />
+    <Compile Include="Models\tb_trainer_feedback.cs" />
+    <Compile Include="Models\TD.cs" />
+    <Compile Include="Models\TechnologyGroup.cs" />
+    <Compile Include="Models\TempEmployee.cs" />
+    <Compile Include="Models\temptimelog.cs" />
+    <Compile Include="Models\test.cs" />
+    <Compile Include="Models\timelog.cs" />
+    <Compile Include="Models\timespentlog.cs" />
+    <Compile Include="Models\tmpRequestMaster.cs" />
+    <Compile Include="Models\Tools_Manual.cs" />
+    <Compile Include="Models\Trainee.cs" />
+    <Compile Include="Models\traing_linkTable.cs" />
+    <Compile Include="Models\trainingcalenderForm.cs" />
+    <Compile Include="Models\trainingrequest.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionMaster.cs" />
+    <Compile Include="Models\TrgCategory.cs" />
+    <Compile Include="Models\TrgEligibility.cs" />
+    <Compile Include="Models\TrgParticipant.cs" />
+    <Compile Include="Models\TrgRegistration.cs" />
+    <Compile Include="Models\TrgSchedule.cs" />
+    <Compile Include="Models\TrgTest.cs" />
+    <Compile Include="Models\TrgTrainer.cs" />
+    <Compile Include="Models\TrgTraining.cs" />
+    <Compile Include="Models\TrgVenue.cs" />
+    <Compile Include="Models\unit.cs" />
+    <Compile Include="Models\unitimage.cs" />
+    <Compile Include="Models\UnitMaster.cs" />
+    <Compile Include="Models\UNIT_SPECIFIC.cs" />
+    <Compile Include="Models\Userlog.cs" />
+    <Compile Include="Models\v1.cs" />
+    <Compile Include="Models\vCommTrckDet.cs" />
+    <Compile Include="Models\vCurrentDateTime.cs" />
+    <Compile Include="Models\Vendor.cs" />
+    <Compile Include="Models\VIEW1.cs" />
+    <Compile Include="Models\VIEW1s.cs" />
+    <Compile Include="Models\VIEW5.cs" />
+    <Compile Include="Models\VIEW7.cs" />
+    <Compile Include="Models\ViewProject.cs" />
+    <Compile Include="Models\vPrjTime.cs" />
+    <Compile Include="Models\VwAllIssuedBook.cs" />
+    <Compile Include="Models\VwAllMissedBook.cs" />
+    <Compile Include="Models\vw_LostBooks.cs" />
+    <Compile Include="Models\vw_LostBooksAll.cs" />
+    <Compile Include="Models\vw_ModulewisePlannedEfforts.cs" />
+    <Compile Include="Models\vw_ModulewiseVariance.cs" />
+    <Compile Include="Models\vw_Project_Audit_NC.cs" />
+    <Compile Include="Models\vw_QuarterlyAudit.cs" />
+    <Compile Include="Models\vw_VariancePhasewise.cs" />
+    <Compile Include="Models\vw_WorkLogDefaulter.cs" />
+    <Compile Include="Models\worklog.cs" />
+    <Compile Include="Models\WorkLog1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\IGenericRepository.cs" />
+    <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{ea8c6881-a375-4ba8-8e36-363517590f4e}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

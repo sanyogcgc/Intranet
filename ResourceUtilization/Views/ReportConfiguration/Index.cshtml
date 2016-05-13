@@ -1,0 +1,116 @@
+﻿@model ViewModel.ResourceConfigurationViewModel
+
+<link href="~/Css/jquery-ui.css" rel="stylesheet" />
+<link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Css/ui.jqgrid.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/grid.locale-en.js"></script>
+@*<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">*@
+<link href="~/Css/smoothness-jquery-ui.css" rel="stylesheet" />
+
+@*<script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
+<script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.js"></script>
+<script type="text/javascript" src="~/Scripts/datepicker/jquery.plugin.js"></script>
+<script type="text/javascript" src="~/Scripts/datepicker/jquery.datepick.js"></script>
+<script src="~/Scripts/jquery.table2excel.js"></script>
+<script src="~/Scripts/ConfigurationReport.js"></script>
+<script>
+    $(function () {
+        $("#ddlStartDate").datepicker();
+        $("#ddlEndDate").datepicker();
+    });
+</script>
+<!DOCTYPE html>
+<div id="DivHead" class="jumbotron">
+
+    @*<p>Date: <input type="text" id="datepicker"></p>*@
+
+    <div class="col-md-12"> <h3>Resource Configuration Report</h3></div>
+    <div class="col-md-12"><hr /></div>
+    <div class="outer-form">
+        <div class="form_layout ">
+            <div class="row col-md-12">
+                <div class="col-md-2 ">  From :</div>
+                <div class="col-md-4 ">
+
+                    @Html.TextBox("StartDate", Model.StartDate.HasValue ? Model.StartDate.Value.ToString("MM/dd/yyyy") : "", new { style = "width:150px", id = "ddlStartDate", @class = "form-control", @readonly = true })
+                    <span id="SelectedStrDate" class="requiredata" style="width: 10px; color: Red; visibility: hidden; ">*</span>
+                </div>
+
+
+                <div class="col-md-2 "> To:</div>
+                <div class="col-md-4 ">
+
+                    @Html.TextBox("EndTime", Model.EndTime.HasValue ? Model.EndTime.Value.ToString("MM/dd/yyyy") : "", new { style = "width:150px", id = "ddlEndDate", @class = "form-control", @readonly = true })
+                    <span id="SelectedEndTime" class="requiredata" style="width: 10px; color: Red; visibility: hidden; ">*</span>
+                </div>
+            </div>
+            <div class="row col-md-12"></div>
+            <div class="row col-md-12">
+
+                <div class="col-md-2 ">Technology Group :</div>
+                <div class="col-md-4 ">
+
+                    @Html.DropDownListFor(model => model.TechnologyGroup, new SelectList(Model.TechnologyGroupList, "Id", "Technology_Name"), "----Select----", new { id = "technologygrp", style = "width:100%;", @class = "form-control", onchange = "return GetResourcesFromTechnologyGrp();" })
+                    <span id="technologyError" class="displayError" style="color:red; visibility:hidden">*</span>
+                    <input type="hidden" id="hdntechnology" name="hdntechnology" value="0" />
+                </div>
+                @*<div class="col-md-2 ">   Resources :</div>*@
+                <div class="col-md-4 ">
+                    @Html.DropDownListFor(model => model.EmployeeDetail, new SelectList(Model.EmployeeList, "Emp_Id", "EmpName"), new { id = "resources", style = "display:none;", @class = "form-control", onchange = "getdataAll();"  })
+                    <span id="resourcesError" class="displayError" style="color:red; visibility:hidden">*</span>
+                </div>
+                <input type="hidden" id="hdnresource" name="hdnresource" value="0" />
+
+                <p></p>
+                <div class="row clearfix">
+
+                    <div class="col-md-12 greytheme">
+                        <fieldset>
+                            <div id="jqGrid"   class="table2excel">
+                              
+                                    <table id="_ResourceGrid" cellpadding="0" cellspacing="0"></table>
+                             
+                                <div style="display:none;">
+                                    <table id="gridDetail"></table>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    
+                </div>
+                <p></p>
+                <div id="exprt">
+                  
+                    @*<center><button name="clickExcel" id="clickExcel" type="submit" class="btn" onclick="ExportExcel();">Exp</button></center>*@
+                    <center><button name="btnExportReport" id="btnExportReport" type="submit" class="btn" onclick="Export();">Export report</button></center>
+                </div>
+                <div >
+                 
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var paramFromView = {
+        Url: '@Url.Content("~/ReportConfiguration/GetDataAll")',
+        UrlSave: '@Url.Content("~/Home/Update")',
+        Width: '',
+        Height: '',
+        FormId: '#ResourceForm',
+        GridId: '#_ResourceGrid',
+        DataNotAvaliable: 'No Records Found',
+        Message: '#lblMessage',
+        btnSubmit: '#btnSubmit',
+        urlRelative: '@Url.Content("~/")',
+    };
+
+</script>
+
+
+
+

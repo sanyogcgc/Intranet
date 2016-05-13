@@ -1,0 +1,156 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>How to use 'actions' buttons</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/redmond/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.ok-soft-gmbh.com/jqGrid/jquery.jqGrid-3.8.2/css/ui.jqgrid.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+    <script type="text/javascript" src="http://www.ok-soft-gmbh.com/jqGrid/jquery.jqGrid-3.8.2/js/i18n/grid.locale-en.js"></script>
+    <script type="text/javascript" src="http://www.ok-soft-gmbh.com/jqGrid/jquery.jqGrid-3.8.2/js/jquery.jqGrid.min.js"></script>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function () {
+            var lastSel, mydata = [
+                    { id: "1", invdate: "2007-10-01", name: "test", note: "note", amount: "200.00", tax: "10.00", closed: true, ship_via: "TN", total: "210.00" },
+                    { id: "2", invdate: "2007-10-02", name: "test2", note: "note2", amount: "300.00", tax: "20.00", closed: false, ship_via: "FE", total: "320.00" },
+                    { id: "3", invdate: "2007-09-01", name: "test3", note: "note3", amount: "400.00", tax: "30.00", closed: false, ship_via: "FE", total: "430.00" },
+                    { id: "4", invdate: "2007-10-04", name: "test4", note: "note4", amount: "200.00", tax: "10.00", closed: true, ship_via: "TN", total: "210.00" },
+                    { id: "5", invdate: "2007-10-31", name: "test5", note: "note5", amount: "300.00", tax: "20.00", closed: false, ship_via: "FE", total: "320.00" },
+                    { id: "6", invdate: "2007-09-06", name: "test6", note: "note6", amount: "400.00", tax: "30.00", closed: false, ship_via: "FE", total: "430.00" },
+                    { id: "7", invdate: "2007-10-04", name: "test7", note: "note7", amount: "200.00", tax: "10.00", closed: true, ship_via: "TN", total: "210.00" },
+                    { id: "8", invdate: "2007-10-03", name: "test8", note: "note8", amount: "300.00", tax: "20.00", closed: false, ship_via: "FE", total: "320.00" },
+                    { id: "9", invdate: "2007-09-01", name: "test9", note: "note9", amount: "400.00", tax: "30.00", closed: false, ship_via: "TN", total: "430.00" },
+                    { id: "10", invdate: "2007-09-08", name: "test10", note: "note10", amount: "500.00", tax: "30.00", closed: true, ship_via: "TN", total: "530.00" },
+                    { id: "11", invdate: "2007-09-08", name: "test11", note: "note11", amount: "500.00", tax: "30.00", closed: false, ship_via: "FE", total: "530.00" },
+                    { id: "12", invdate: "2007-09-10", name: "test12", note: "note12", amount: "500.00", tax: "30.00", closed: false, ship_via: "FE", total: "530.00" }
+            ],
+                grid = $("#list"),
+                myDelOptions = {
+                    // because I use "local" data I don't want to send the changes to the server
+                    // so I use "processing:true" setting and delete the row manually in onclickSubmit
+                    onclickSubmit: function (rp_ge, rowid) {
+                        // we can use onclickSubmit function as "onclick" on "Delete" button
+                        alert("The row with rowid=" + rowid + " will be deleted");
+
+                        // delete row
+                        grid.delRowData(rowid);
+                        $("#delmod" + grid[0].id).hide();
+
+                        if (grid[0].p.lastpage > 1) {
+                            // reload grid to make the row from the next page visable.
+                            // TODO: deleting the last row from the last page which number is higher as 1
+                            grid.trigger("reloadGrid", [{ page: grid[0].p.page }]);
+                        }
+
+                        return true;
+                    },
+                    processing: true
+                };
+
+            grid.jqGrid({
+                datatype: "local",
+                data: mydata,
+                colNames: ['Actions', 'Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Closed', 'Shipped via', 'Notes'],
+                colModel: [
+                    {
+                        name: 'act', index: 'act', width: 55, align: 'center', sortable: false, formatter: 'actions',
+                        formatoptions: {
+                            keys: true, // we want use [Enter] key to save the row and [Esc] to cancel editing.
+                            onEdit: function (rowid) {
+                                alert("in onEdit: rowid=" + rowid + "\nWe don't need return anything");
+                            },
+                            onSuccess: function (jqXHR) {
+                                // the function will be used as "succesfunc" parameter of editRow function
+                                // (see http://www.trirand.com/jqgridwiki/doku.php?id=wiki:inline_editing#editrow)
+                                alert("in onSuccess used only for remote editing:" +
+                                      "\nresponseText=" + jqXHR.responseText +
+                                      "\n\nWe can verify the server response and return false in case of" +
+                                      " error response. return true confirm that the response is successful");
+                                // we can verify the server response and interpret it do as an error
+                                // in the case we should return false. In the case onError will be called
+                                return true;
+                            },
+                            onError: function (rowid, jqXHR, textStatus) {
+                                // the function will be used as "errorfunc" parameter of editRow function
+                                // (see http://www.trirand.com/jqgridwiki/doku.php?id=wiki:inline_editing#editrow)
+                                // and saveRow function
+                                // (see http://www.trirand.com/jqgridwiki/doku.php?id=wiki:inline_editing#saverow)
+                                alert("in onError used only for remote editing:" +
+                                      "\nresponseText=" + jqXHR.responseText +
+                                      "\nstatus=" + jqXHR.status +
+                                      "\nstatusText" + jqXHR.statusText +
+                                      "\n\nWe don't need return anything");
+                            },
+                            afterSave: function (rowid) {
+                                alert("in afterSave (Submit): rowid=" + rowid + "\nWe don't need return anything");
+                            },
+                            afterRestore: function (rowid) {
+                                alert("in afterRestore (Cancel): rowid=" + rowid + "\nWe don't need return anything");
+                            },
+                            delOptions: myDelOptions
+                        }
+                    },
+                    { name: 'id', index: 'id', width: 70, align: 'center', sorttype: 'int', searchoptions: { sopt: ['eq', 'ne'] } },
+                    {
+                        name: 'invdate', index: 'invdate', width: 80, align: 'center', sorttype: 'date',
+                        formatter: 'date', formatoptions: { newformat: 'd-M-Y' }
+                    },
+                    { name: 'name', index: 'name', editable: true, width: 70, editrules: { required: true } },
+                    { name: 'amount', index: 'amount', width: 100, formatter: 'number', editable: true, align: "right" },
+                    { name: 'tax', index: 'tax', width: 70, formatter: 'number', editable: true, align: "right" },
+                    { name: 'total', index: 'total', width: 120, formatter: 'number', editable: true, align: "right" },
+                    {
+                        name: 'closed', index: 'closed', width: 110, align: 'center', editable: true, formatter: 'checkbox',
+                        edittype: "checkbox", editoptions: { value: "Yes:No", defaultValue: "Yes" },
+                        stype: "select", searchoptions: { sopt: ['eq', 'ne'], value: ":All;true:Yes;false:No" }
+                    },
+                    {
+                        name: 'ship_via', index: 'ship_via', width: 120, align: 'center', editable: true, formatter: 'select',
+                        edittype: "select", editoptions: { value: 'FE:FedEx;TN:TNT;IN:Intim', defaultValue: 'Intime' },
+                        stype: "select", searchoptions: { value: ':All;FE:FedEx;TN:TNT;IN:Intim' }
+                    },
+                    { name: 'note', index: 'note', width: 100, sortable: false }
+                ],
+                rowNum: 10,
+                rowList: [5, 10, 20],
+                pager: '#pager',
+                gridview: true,
+                rownumbers: true,
+                ignoreCase: true,
+                sortname: 'invdate',
+                viewrecords: true,
+                sortorder: "desc",
+                caption: "How to use 'actions' buttons",
+                height: "100%",
+                editurl: 'clientArray',
+                ondblClickRow: function (id, ri, ci) {
+                    // edit the row and save it on press "enter" key
+                    grid.jqGrid('editRow', id, true, null, null, 'clientArray');
+                },
+                onSelectRow: function (id) {
+                    if (id && id !== lastSel) {
+                        // cancel editing of the previous selected row if it was in editing state.
+                        // jqGrid hold intern savedRow array inside of jqGrid object,
+                        // so it is safe to call restoreRow method with any id parameter
+                        // if jqGrid not in editing state
+                        if (typeof lastSel !== "undefined") {
+                            grid.jqGrid('restoreRow', lastSel);
+                        }
+                        lastSel = id;
+                    }
+                }
+            }).jqGrid('navGrid', '#pager', { add: false, edit: false }, {}, {}, myDelOptions, { multipleSearch: true, overlay: false });
+            //grid.jqGrid('filterToolbar',{defaultSearch:'cn',stringResult:true});
+
+        });
+        //]]>
+    </script>
+</head>
+<body>
+    <div class="ui-widget ui-widget-content ui-corner-all ui-jqdialog" id="alertmod" dir="ltr" tabindex="-1" role="dialog">
+        <table id="list"></table>
+    </div>
+</body>
+</html>
